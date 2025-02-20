@@ -76,36 +76,198 @@ Object-Oriented Programming (OOP) adalah paradigma pemrograman yang berorientasi
 4. **Abstraction** - Menyembunyikan detail kompleks dan hanya menampilkan fungsionalitas utama.
 
 ## 3. Kelas dan Objek dalam C++
-Kelas adalah blueprint dari objek. Objek adalah instance dari kelas.
+Dalam pemrograman berorientasi objek (OOP), kelas adalah sebuah blueprint atau template yang mendefinisikan data (atribut) dan perilaku (metode) yang dimiliki oleh objek. Sementara itu, objek adalah instance konkret dari kelas yang dibuat di dalam program.
 
-### Contoh Kelas dan Objek:
+### 3.1 Struktur Dasar Kelas dalam C++
+Sebuah kelas dalam C++ dideklarasikan menggunakan kata kunci class, diikuti oleh nama kelas dan sekelompok atribut serta metode.
+
+Sintaks dasar kelas:
+
+```cpp
+class NamaKelas {
+private:
+    // Atribut (data members)
+public:
+    // Metode (member functions)
+};
+```
+
+### 3.2 Membuat dan Menggunakan Kelas dan Objek
+Mari kita lihat contoh bagaimana mendefinisikan sebuah kelas dan membuat objek dari kelas tersebut.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Mahasiswa {
+public:
+    // Atribut
+    string nama;
+    int umur;
+
+    // Method (fungsi dalam kelas)
+    void perkenalan() {
+        cout << "Halo, nama saya " << nama << " dan saya berusia " << umur << " tahun." << endl;
+    }
+};
+
+int main() {
+    // Membuat objek dari kelas Mahasiswa
+    Mahasiswa mhs1;
+
+    // Mengisi atribut objek
+    mhs1.nama = "Budi";
+    mhs1.umur = 20;
+
+    // Memanggil metode
+    mhs1.perkenalan();
+
+    return 0;
+}
+```
+
+Penjelasan kode:
+
+1. Mendeklarasikan kelas Mahasiswa dengan dua atribut (nama dan umur) serta satu metode (perkenalan()).
+2. Membuat objek mhs1 dari kelas Mahasiswa.
+3. Mengisi atribut objek dengan nilai.
+4. Memanggil metode untuk mencetak informasi mahasiswa ke layar.
+
+### 3.3 Akses Modifier dalam Kelas
+Dalam C++, ada tiga jenis aksesibilitas untuk anggota kelas:
+
+1. private → Hanya bisa diakses dari dalam kelas itu sendiri.
+2. public → Bisa diakses dari luar kelas.
+3. protected → Hanya bisa diakses oleh kelas itu sendiri dan turunannya (digunakan dalam inheritance).
+
+Contoh Akses Modifier
 ```cpp
 #include <iostream>
 using namespace std;
 
 class Mahasiswa {
 private:
+    string nama; // Hanya bisa diakses dalam kelas ini
+
+public:
+    void setNama(string n) { 
+        nama = n; 
+    }
+
+    string getNama() { 
+        return nama; 
+    }
+};
+
+int main() {
+    Mahasiswa mhs1;
+    mhs1.setNama("Siti");
+    cout << "Nama Mahasiswa: " << mhs1.getNama() << endl;
+    return 0;
+}
+```
+
+Penjelasan:
+
+1. nama bersifat private, jadi tidak bisa diakses langsung dari main().
+2. Untuk mengubah dan mengambil nilai nama, digunakan getter (getNama()) dan setter (setNama()).
+
+### 3.4 Constructor dan Destructor
+
+#### Constructor
+Constructor adalah metode khusus yang otomatis dipanggil saat objek dibuat. Nama constructor harus sama dengan nama kelas dan tidak memiliki tipe kembalian.
+
+Contoh Constructor:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Mahasiswa {
+public:
     string nama;
     int umur;
 
-public:
     // Constructor
     Mahasiswa(string n, int u) {
         nama = n;
         umur = u;
+        cout << "Objek mahasiswa telah dibuat!" << endl;
     }
-    
-    // Method untuk menampilkan data
+
     void tampilkanData() {
         cout << "Nama: " << nama << ", Umur: " << umur << " tahun." << endl;
     }
 };
 
 int main() {
-    Mahasiswa mhs1("Budi", 20);
+    Mahasiswa mhs1("Andi", 21);
     mhs1.tampilkanData();
     return 0;
 }
+```
+
+#### Destructor
+Destructor adalah metode khusus yang dipanggil secara otomatis ketika objek dihancurkan atau keluar dari scope.
+
+Contoh Destructor:
+
+```cpp
+class Mahasiswa {
+public:
+    string nama;
+
+    // Constructor
+    Mahasiswa(string n) { nama = n; }
+
+    // Destructor
+    ~Mahasiswa() {
+        cout << "Objek mahasiswa " << nama << " telah dihancurkan." << endl;
+    }
+};
+
+int main() {
+    Mahasiswa mhs1("Lina");
+    return 0;
+}
+Instansiasi Banyak Objek
+Satu kelas bisa digunakan untuk membuat banyak objek dengan atribut berbeda.
+```
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Mobil {
+public:
+    string merk;
+    int tahun;
+
+    void info() {
+        cout << "Mobil " << merk << ", tahun " << tahun << endl;
+    }
+};
+
+int main() {
+    Mobil mobil1, mobil2;
+
+    mobil1.merk = "Toyota";
+    mobil1.tahun = 2020;
+
+    mobil2.merk = "Honda";
+    mobil2.tahun = 2019;
+
+    mobil1.info();
+    mobil2.info();
+
+    return 0;
+}
+Output:
+```
+
+```yaml
+Mobil Toyota, tahun 2020
+Mobil Honda, tahun 2019
 ```
 
 ## 4. Encapsulation
