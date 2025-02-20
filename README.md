@@ -230,9 +230,11 @@ int main() {
     Mahasiswa mhs1("Lina");
     return 0;
 }
+```
+
 Instansiasi Banyak Objek
 Satu kelas bisa digunakan untuk membuat banyak objek dengan atribut berbeda.
-```
+
 
 ```cpp
 #include <iostream>
